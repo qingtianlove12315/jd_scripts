@@ -86,7 +86,7 @@ if (process.env.FRUITSHARECODES) {
   }
 }
 
-requsetListWithAction(FRUITSHARECODES, 'ddfactory');
+requsetListWithAction(FRUITSHARECODES, 'farm');
 
 // 东东萌宠
 let PETSHARECODES = [
@@ -136,7 +136,7 @@ let DDFACTORY_SHARECODES = [
 ];
 
 
-// 读取种豆
+// 读取东东工厂
 if (process.env.DDFACTORY_SHARECODES) {
   let value = getSpliteList(process.env.DDFACTORY_SHARECODES)
   if (value.length > 0) {
