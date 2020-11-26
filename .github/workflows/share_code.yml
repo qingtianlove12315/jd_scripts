@@ -6,7 +6,7 @@ name: share_code【提交分享码】
 on:
   workflow_dispatch:
   schedule:
-    - cron: '1 0 * * *'
+    - cron: '3 3 * * *'
   watch:
     types: [started]
   repository_dispatch:
@@ -41,3 +41,7 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          FRUITSHARECODES: ${{ secrets.FRUITSHARECODES }}
+          PETSHARECODES: ${{ secrets.PETSHARECODES }}
+          PLANT_BEAN_SHARECODES: ${{ secrets.PLANT_BEAN_SHARECODES }}
+          DDFACTORY_SHARECODES: ${{ secrets.DDFACTORY_SHARECODES }}
