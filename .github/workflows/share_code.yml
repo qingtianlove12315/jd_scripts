@@ -10,7 +10,7 @@ on:
   watch:
     types: [started]
   repository_dispatch:
-    types: share_code【提交分享码】
+    types: share_code
 jobs:
   build:
 
