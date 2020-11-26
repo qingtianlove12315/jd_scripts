@@ -6,7 +6,7 @@ name: share_code【提交分享码】
 on:
   workflow_dispatch:
   schedule:
-    - cron: '3 3 * * *'
+    - cron: '19 19 * * *'
   watch:
     types: [started]
   repository_dispatch:

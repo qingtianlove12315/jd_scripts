@@ -6,7 +6,7 @@ name: 东东小窝脚本【东东小窝脚本】
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 16,22 * * *'
+    - cron: '20 0 * * *'
   watch:
     types: started
   repository_dispatch:
