@@ -145,3 +145,10 @@ if (process.env.DDFACTORY_SHARECODES) {
 }
 
 requsetListWithAction(DDFACTORY_SHARECODES, 'ddfactory');
+
+// 惊喜工厂
+let jxfactory = [
+  'SyNBZQvjSBenzPwonSPARw=='
+]
+
+requsetListWithAction(jxfactory,'jxfactory');
