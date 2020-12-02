@@ -24,6 +24,7 @@ jobs:
                   node-version: 10.x
             - name: npm install
               run: |
+                  cp package2.json package.json
                   npm install
             - name: "运行 【京喜金牌厂长】"
               run: |
