@@ -1,6 +1,6 @@
 /*
 京东京喜工厂
-更新时间：2020-12-03
+更新时间：2020-12-04
 活动入口 :京东APP->游戏与互动->查看更多->京喜工厂
 或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
 
@@ -32,11 +32,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
 const tuanActiveId = `jfkcidGQavswLOBcAWljrw==`;
-const tuanIDs = [
-  "XgKt9JBOEZEqFpTk1gw79g==",
-  'lvArkUAPQtXfjt9O7PGh9A==',
-  'Edcyq9n8AFJH16varH0-bw=='
-]
+
 let cookiesArr = [], cookie = '', message = '';
 const inviteCodes = ['V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=', 'PDPM257r_KuQhil2Y7koNw==', "gB99tYLjvPcEFloDgamoBw=="];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -537,17 +533,17 @@ function userInfo() {
                 message += `【当前等级】${data.user.userIdentity} ${data.user.currentLevel}\n`;
                 message += `【生产进度】${((production.investedElectric / production.needElectric) * 100).toFixed(2)}%\n`;
                 if (production.investedElectric >= production.needElectric) {
-                  $.msg($.name, ``, `【京东账号${$.index}】${$.nickName}\n【生产商品】${$.productName}\n已生产完,请速去兑换`, {'open-url': 'openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D'})
-                  await notify.sendNotify(`${$.name} - 京东账号${$.index} - ${$.nickName}`, `【京东账号${$.index}】${$.nickName}\n【生产商品】${$.productName}\n已生产完,请速去兑换`)
+                  $.msg($.name, ``, `【京东账号${$.index}】${$.nickName}\n【生产商品】${$.productName}\n已生产完,请速去京喜APP->首页->好物0元造进行兑换`, {'open-url': 'openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D'})
+                  await notify.sendNotify(`${$.name} - 京东账号${$.index} - ${$.nickName}`, `【京东账号${$.index}】${$.nickName}\n【生产商品】${$.productName}\n已生产完,请速去京喜APP->首页->好物0元造进行兑换`)
                 }
               } else {
                 $.unActive = false;//标记是否开启了京喜活动或者选购了商品进行生产
                 if (!data.factoryList) {
-                  console.log('【提示】此账号京喜工厂活动未开始\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动\n');
-                  $.msg($.name, '【提示】', `京东账号${$.index}[${$.nickName}]京喜工厂活动未开始\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动`);
+                  console.log('【提示】京东账号${$.index}[${$.nickName}]京喜工厂活动未开始\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动\n');
+                  // $.msg($.name, '【提示】', `京东账号${$.index}[${$.nickName}]京喜工厂活动未开始\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动`);
                 } else if (data.factoryList && !data.productionList) {
-                  console.log(`【提示】此账号京喜工厂未选购商品\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 选购\n`)
-                  $.msg($.name, '【提示】', `京东账号${$.index}[${$.nickName}]京喜工厂未选择商品\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 选择商品`);
+                  console.log(`【提示】京东账号${$.index}[${$.nickName}]京喜工厂未选购商品\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 选购\n`)
+                  // $.msg($.name, '【提示】', `京东账号${$.index}[${$.nickName}]京喜工厂未选择商品\n请手动去京东APP->游戏与互动->查看更多->京喜工厂 选择商品`);
                 }
               }
             } else {
@@ -887,11 +883,12 @@ function CreateTuan() {
   })
 }
 async function joinLeaderTuan() {
- for (let tuanId of tuanIDs) {
-   if (tuanId) {
-     await JoinTuan(tuanId);
-   }
- }
+  await updateTuanIds();
+  if (!$.tuanIdS) await updateTuanIdsCDN();
+  for (let tuanId of $.tuanIdS.tuanIds) {
+    if (!tuanId) continue
+    await JoinTuan(tuanId);
+  }
 }
 function JoinTuan(tuanId) {
   return new Promise((resolve) => {
@@ -1044,6 +1041,40 @@ function tuanAward(activeId, tuanId, isTuanLeader = true) {
     })
   })
 }
+function updateTuanIds(url = 'https://raw.githubusercontent.com/lxk0301/updateTeam/master/jd_updateFactoryTuanId.json') {
+  return new Promise(resolve => {
+    $.get({url}, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+        } else {
+          $.tuanIdS = JSON.parse(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function updateTuanIdsCDN(url = 'https://raw.fastgit.org/lxk0301/updateTeam/master/jd_updateFactoryTuanId.json') {
+  return new Promise(resolve => {
+    $.get({url}, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+        } else {
+          $.tuanIdS = JSON.parse(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
 async function showMsg() {
   return new Promise(async resolve => {
     let ctrTemp;
@@ -1088,7 +1119,7 @@ function readShareCode() {
         resolve(data);
       }
     })
-    await $.wait(5000);
+    await $.wait(10000);
     resolve()
   })
 }
