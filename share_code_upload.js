@@ -10,7 +10,7 @@ function requestHelper(action, token) {
       port: '80',
       path: `/api/v1/jd/${action}/create/${token}/`,
       method: 'GET',
-      headers: { 'Content-Type': 'text/palin; charset=utf-8', "Accept-Encoding": "zlib, deflate, zstd, br" }
+      headers: { 'Content-Type': 'text/palin; charset=utf-8', "Accept-Encoding": "zlib, deflate, zstd, br",'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36' }
     };
     httpOptions.headers['User-Agent'] = 'node ' + process.version;
 
@@ -148,7 +148,9 @@ requsetListWithAction(DDFACTORY_SHARECODES, 'ddfactory');
 
 // 惊喜工厂
 let jxfactory = [
-  'SyNBZQvjSBenzPwonSPARw=='
+  'SyNBZQvjSBenzPwonSPARw==',
+  'gacXxuxWeXE9-VOt3Yar1w==',
+  'eGjI5clv22xpQWv8Ku27YQ=='
 ]
 
 requsetListWithAction(jxfactory,'jxfactory');
