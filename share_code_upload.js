@@ -156,13 +156,13 @@ let jxfactory = [
 requsetListWithAction(jxfactory,'jxfactory');
 
 
-//苹果抽奖机
-let jdapple = [
-  'P04z54XCjVUm4aW5mlSUGL63n9DnFw',
-  'P04z54XCjVUm4aW5mlOQT-mijUTk0ne',
-  'P04z54XCjVUm4aW5m9cZ2Tw2y1Pl2mjfX9PLyA',
-  'P04z54XCjVUm4aW5nxRQjmmiCcV',
-  'P04z54XCjVUm4aW5jQLAGXx3XtInLFHjy8',
-]
+// //苹果抽奖机
+// let jdapple = [
+//   'P04z54XCjVUm4aW5mlSUGL63n9DnFw',
+//   'P04z54XCjVUm4aW5mlOQT-mijUTk0ne',
+//   'P04z54XCjVUm4aW5m9cZ2Tw2y1Pl2mjfX9PLyA',
+//   'P04z54XCjVUm4aW5nxRQjmmiCcV',
+//   'P04z54XCjVUm4aW5jQLAGXx3XtInLFHjy8',
+// ]
 
-requsetListWithAction(jdapple,'jdapple');
+// requsetListWithAction(jdapple,'jdapple');
