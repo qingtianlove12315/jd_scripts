@@ -150,6 +150,7 @@ requsetListWithAction(DDFACTORY_SHARECODES, 'ddfactory');
 let jxfactory = [
   'SyNBZQvjSBenzPwonSPARw==',
   'gacXxuxWeXE9-VOt3Yar1w==',
+  '0MJBvMp-ha4aFNkv_-x6xQ==',
   'eGjI5clv22xpQWv8Ku27YQ=='
 ]
 
