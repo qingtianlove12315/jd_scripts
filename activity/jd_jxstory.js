@@ -27,12 +27,12 @@ cron "10 7 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scrip
 const $ = new Env('京喜故事');
 const JD_API_HOST = 'https://m.jingxi.com';
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = 3;
 let cookiesArr = [], cookie = '', message = '';
 const inviteCodes = ['g_rdWTW8RaN_SDaGOfaXcIHGafDEJol9iGvHxj0yPfM=@KqoM9jLzpw7HeYIr-5-o_e6l5K2M9aWu3HEZ8rcOa3A=@aI837XBp7xykBI--HwB2QHcIYxjCjwRyC5BkKnkx2w0=@XpJlAYN7zxtLZrasS6awkmDUbchmWXyuv8kIsz5FIpE=@RUvr1V06eMsRrfN8lny48MIZle9sWk1f-NC4kt0L6nI='];
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
