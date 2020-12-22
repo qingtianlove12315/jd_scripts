@@ -48,6 +48,55 @@ function requestHelper(action, token) {
   });
 }
 
+function requestHelper2(action, token) {
+  (function (callback) {
+    'use strict';
+
+    const httpTransport = require('https');
+    const responseEncoding = 'utf8';
+    const httpOptions = {
+      hostname: 'code.chiang.fun',
+      port: '443',
+      path: `/api/v1/jd/${action}/create/${token}/`,
+      method: 'GET',
+      headers: { 'Content-Type': 'text/palin; charset=utf-8', "Accept-Encoding": "zlib, deflate, zstd, br",'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36' }
+    };
+    httpOptions.headers['User-Agent'] = 'node ' + process.version;
+
+    // Paw Store Cookies option is not supported
+
+    const request = httpTransport.request(httpOptions, (res) => {
+      let responseBufs = [];
+      let responseStr = '';
+
+      res.on('data', (chunk) => {
+        if (Buffer.isBuffer(chunk)) {
+          responseBufs.push(chunk);
+        }
+        else {
+          responseStr = responseStr + chunk;
+        }
+      }).on('end', () => {
+        responseStr = responseBufs.length > 0 ?
+          Buffer.concat(responseBufs).toString(responseEncoding) : responseStr;
+
+        callback(null, res.statusCode, res.headers, responseStr);
+      });
+
+    })
+      .setTimeout(0)
+      .on('error', (error) => {
+        callback(error);
+      });
+    request.write("")
+    request.end();
+
+
+  })((error, statusCode, headers, body) => {
+    console.log(`${action} STATUS:${statusCode} BODY:${body}`);
+  });
+}
+
 // 数据分割
 function getSpliteList(code) {
   if (code.indexOf('&') > -1) {
@@ -64,6 +113,14 @@ function getSpliteList(code) {
 function requsetListWithAction(codeList, action) {
   codeList.forEach(token => {
     requestHelper(action, token);
+  });
+
+  console.log(`${action} : ${codeList.join('&')}`);
+}
+
+function requsetListWithActionWithCodeDomain(codeList, action) {
+  codeList.forEach(token => {
+    requestHelper2(action, token);
   });
 
   console.log(`${action} : ${codeList.join('&')}`);
@@ -167,3 +224,14 @@ requsetListWithAction(jxfactory,'jxfactory');
 // ]
 
 // requsetListWithAction(jdapple,'jdapple');
+
+let jdzz = [
+  'AV28Ona-TzjwBDg',
+  'AV3MfwPPHhGwOCGc',
+  'AUWE5m6WWnDAKADGs1ClOxg',
+  'AQmwcxvPFlmo',
+  'ACjZemqSQyjcBDGKXnQ',
+]
+
+requsetListWithActionWithCodeDomain(jdzz,'jdzz')
+
