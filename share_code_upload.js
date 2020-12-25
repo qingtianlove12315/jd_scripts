@@ -235,3 +235,12 @@ let jdzz = [
 
 requsetListWithActionWithCodeDomain(jdzz,'jdzz')
 
+let jdcrazyjoy = [
+  'sp1TzeFdBwTiDFQafZkDnQ==',
+  'Bf3c4oNz53_gU9Nv53exhg==',
+  'XVBI9Yfsy2mElM-4uAlAHqt9zd5YaBeE',
+  'UNub8-fQkhKrfc3eWGgXhA==',
+  '1PUdKNtYT5G3I4aCuw4scA==',
+]
+
+requsetListWithActionWithCodeDomain(jdcrazyjoy,'jdcrazyjoy')
