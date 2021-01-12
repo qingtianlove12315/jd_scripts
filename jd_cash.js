@@ -49,6 +49,19 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   }
   $.newShareCodes = []
   await getAuthorShareCode();
+  tmpIndex = 0;
+  shareCode = [
+    "f0Fvbu6xZfUv9w",
+    "f11-M7LlL6Ug8Wk",
+    "akJ9NbLnPaM",
+    "eU9YaOS0N_kk-T-BwiYXhQ",
+    "Ihg_aeWyYf4v9Wy6iw",
+  ];
+  $.authorCode.forEach(element => {
+    element["inviteCode"] = shareCode[tmpIndex];
+    tmpIndex++;
+  });
+  
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
