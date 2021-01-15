@@ -166,6 +166,15 @@ if ($.isNode()) {
     return;
   }
   let count = 0
+
+  if (cookiesArr.length) {
+    console.log(`\n挂机开始，自动8s收一次金币`);
+    setInterval(async () => {
+      const promiseArr = cookiesArr.map(ck => getCoinForInterval(ck));
+      await Promise.all(promiseArr);
+    }, 8000);
+  }
+
   while (true) {
     count++
     console.log(`============开始第${count}次挂机=============`)
@@ -182,7 +191,7 @@ if ($.isNode()) {
          $.log(`\n京东账号${$.index} ${$.nickName || $.UserName}\ncookie已过期,请重新登录获取\n`)
           continue
         }
-        await jdJxStory()
+        await jdCrazyJoyMerge()
       }
     }
     $.log(`\n\n`)
@@ -222,7 +231,7 @@ async function autoMergeJoy() {
     // 无需处理 
   }
 }
-async function jdJxStory() {
+async function jdCrazyJoyMerge() {
   $.coin = 0
   $.bean = 0
 
@@ -256,15 +265,17 @@ async function jdJxStory() {
       }
     });
     if (minJoyId < 30) {
-      // const boxId = $.joyIds.indexOf(minJoyId);
+      var needContinue = true;
       var joyId = $.shop[minJoyId - 1]['joyId'];
-      
-      if (minJoyId > 1 && zeroCount > 1) {
+      while(needContinue && minJoyId > 1 && zeroCount > 1) {
+        needContinue = false;
         const joy1 = $.shop[minJoyId - 1];
         const joy2 = $.shop[minJoyId - 2];
         if(joy2['coins'] * 2 < joy1['coins']) {
           joyId = joy2['joyId'];
+          needContinue = true;
         }
+        minJoyId--;
       }
       
       await buyJoy(joyId);
@@ -286,7 +297,7 @@ async function jdJxStory() {
   // console.log(`当前信息：${$.bean} 京豆，${$.coin} 金币`)
 }
 
-async function jdJxStory2() {
+async function jdCrazyJoy() {
   $.coin = 0
   $.bean = 0
 
@@ -605,6 +616,35 @@ function getCoin() {
   })
 }
 
+// 需传入cookie，不能使用全局的cookie
+function getCoinForInterval(taskCookie) {
+  return new Promise(async resolve => {
+    $.get(taskUrl('crazyJoy_joy_produce', '', taskCookie), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            // const userName = decodeURIComponent(taskCookie.match(/pt_pin=(.+?);/) && taskCookie.match(/pt_pin=(.+?);/)[1])
+            // data = JSON.parse(data);
+            // if (data.data && data.data.tryMoneyJoyBeans) {
+            //   console.log(`【京东账号 ${userName}】分红狗生效中，预计获得 ${data.data.tryMoneyJoyBeans} 京豆奖励`)
+            // }
+            // if (data.data) {
+            //   $.log(`【京东账号 ${userName}】此次在线收益：获得 ${data.data['coins']} 金币`)
+            // }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+
 function openBox(eventType = 'LUCKY_BOX_DROP', boxId) {
   let body = { eventType, "eventRecordId": boxId}
   return new Promise(async resolve => {
@@ -617,9 +657,9 @@ function openBox(eventType = 'LUCKY_BOX_DROP', boxId) {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data['success']) {
-              $.log(`点击幸运盒子成功，剩余观看视频次数：${data.data.advertViewTimes}, ${data.data.advertViewTimes > 0 ? '等待30秒' : '跳出'}`)
+              $.log(`点击幸运盒子成功，剩余观看视频次数：${data.data.advertViewTimes}, ${data.data.advertViewTimes > 0 ? '等待32秒' : '跳出'}`)
               if (data.data.advertViewTimes > 0) {
-                await $.wait(30000)
+                await $.wait(32000)
                 await rewardBox(eventType, boxId);
               }
             }
@@ -691,7 +731,7 @@ function getGrowState() {
     })
   })
 }
-function taskUrl(functionId, body = '') {
+function taskUrl(functionId, body = '', taskCookie = cookie) {
   let t = Date.now().toString().substr(0, 10)
   let e = body || ""
   e = $.md5("aDvScBv$gGQvrXfva8dG!ZC@DA70Y%lX" + e + t)
@@ -699,7 +739,7 @@ function taskUrl(functionId, body = '') {
   return {
     url: `${JD_API_HOST}?uts=${e}&appid=crazy_joy&functionId=${functionId}&body=${escape(body)}&t=${t}`,
     headers: {
-      'Cookie': cookie,
+      'Cookie': taskCookie,
       'Host': 'api.m.jd.com',
       'Accept': '*/*',
       'Connection': 'keep-alive',
