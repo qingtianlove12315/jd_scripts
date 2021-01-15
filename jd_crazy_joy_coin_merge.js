@@ -266,7 +266,7 @@ async function jdCrazyJoyMerge() {
     });
     if (minJoyId < 30) {
       var needContinue = true;
-      var maxMin = 3;
+      var maxMin = 2;
       var joyId = $.shop[minJoyId - 1]['joyId'];
       while(maxMin > 0 && needContinue && minJoyId > 1 && zeroCount > 1) {
         needContinue = false;
@@ -283,8 +283,10 @@ async function jdCrazyJoyMerge() {
       await buyJoy(joyId);
       await $.wait(1000)
     }else {
-      await buyJoy(1);
-      await $.wait(1000)
+      if (zeroCount > 1) {
+        await buyJoy(18);
+        await $.wait(1000)
+      }
     }
   }
 
