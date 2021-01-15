@@ -195,46 +195,10 @@ if ($.isNode()) {
     $.done();
   })
 
-async function jdJxStory() {
-  $.coin = 0
-  $.bean = 0
-
-  $.canBuy = true
-  await getJoyList()
-  await $.wait(1000)
-  await getJoyShop()
-  await $.wait(1000)
-  if ($.joyIds && $.joyIds.length > 0) {
-    $.log('当前JOY分布情况')
-    $.log(`\n${$.joyIds[0]} ${$.joyIds[1]} ${$.joyIds[2]} ${$.joyIds[3]}`)
-    $.log(`${$.joyIds[4]} ${$.joyIds[5]} ${$.joyIds[6]} ${$.joyIds[7]}`)
-    $.log(`${$.joyIds[8]} ${$.joyIds[9]} ${$.joyIds[10]} ${$.joyIds[11]}\n`)
-  }
-
-  if(checkHasFullOccupied()) {
-    console.log(`已满`);
-  }else {
-    var minJoyId = 30;
-    $.joyIds.forEach(element => {
-      if(element > 0 && element < 30) {
-        if (minJoyId > element) {
-          minJoyId = element;
-        }
-      }
-    });
-    if (minJoyId < 30) {
-      // const boxId = $.joyIds.indexOf(minJoyId);
-      const joyId = $.shop[minJoyId - 1]['joyId'];
-      await buyJoy(joyId);
-      await $.wait(1000)
-    }else {
-      await buyJoy(1);
-      await $.wait(1000)
-    }
-  }
-
+async function autoMergeJoy() {
   await getJoyList()
   let obj = {};
+  var needContinue = false;
   $.joyIds.map((vo, idx) => {
     if (vo !== 0) {
       if (obj[vo]) {
@@ -249,16 +213,77 @@ async function jdJxStory() {
     if (idx < 34 && vo.length >= 2) {
       await mergeJoy(vo[0], vo[1])
       await $.wait(3000)
+      needContinue = true
+    }
+  }
+  if (needContinue) {
+    await autoMergeJoy()
+  }else {
+    // 无需处理 
+  }
+}
+async function jdJxStory() {
+  $.coin = 0
+  $.bean = 0
+
+  $.canBuy = true
+  await autoMergeJoy()
+  // await $.wait(1000)
+  // await getJoyList()
+  await $.wait(1000)
+  await getJoyShop()
+  await $.wait(1000)
+  if ($.joyIds && $.joyIds.length > 0) {
+    $.log('当前JOY分布情况')
+    $.log(`\n${$.joyIds[0]} ${$.joyIds[1]} ${$.joyIds[2]} ${$.joyIds[3]}`)
+    $.log(`${$.joyIds[4]} ${$.joyIds[5]} ${$.joyIds[6]} ${$.joyIds[7]}`)
+    $.log(`${$.joyIds[8]} ${$.joyIds[9]} ${$.joyIds[10]} ${$.joyIds[11]}\n`)
+  }
+
+  if(checkHasFullOccupied()) {
+    console.log(`已满`);
+  }else {
+    var minJoyId = 30;
+    var zeroCount = 0;
+    $.joyIds.forEach(element => {
+      if (element == 0) {
+        zeroCount++;
+      }
+      else if(element > 0 && element < 30) {
+        if (minJoyId > element) {
+          minJoyId = element;
+        }
+      }
+    });
+    if (minJoyId < 30) {
+      // const boxId = $.joyIds.indexOf(minJoyId);
+      var joyId = $.shop[minJoyId - 1]['joyId'];
+      
+      if (minJoyId > 1 && zeroCount > 1) {
+        const joy1 = $.shop[minJoyId - 1];
+        const joy2 = $.shop[minJoyId - 2];
+        if(joy2['coins'] * 2 < joy1['coins']) {
+          joyId = joy2['joyId'];
+        }
+      }
+      
+      await buyJoy(joyId);
+      await $.wait(1000)
+    }else {
+      await buyJoy(1);
+      await $.wait(1000)
     }
   }
 
+  // await autoMergeJoy()
+  // await $.wait(1000)
   await hourBenefit()
   await $.wait(1000)
   await getCoin()
-  await $.wait(1000)
-  await getUserBean()
-  await $.wait(2000)
-  console.log(`当前信息：${$.bean} 京豆，${$.coin} 金币`)
+  // await $.wait(1000)
+  // await getUserBean()
+  // await $.wait(2000)
+  // console.log(`当前信息：${$.bean} 京豆，${$.coin} 金币`)
 }
 
 async function jdJxStory2() {
