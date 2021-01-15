@@ -27,7 +27,7 @@ const $ = new Env('crazyJoy挂机');
 const JD_API_HOST = 'https://api.m.jd.com/';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
-let cookiesArr = ['pt_key=AAJf5rP2ADAt_CjKyuAWhnFdz_7QOgwXji-V1h4hCsmpPphNqn6jP5sioBnW5mJPLl18NGRnyUg; pt_pin=ljh2233996;'], cookie = '', message = '';
+let cookiesArr = [], cookie = '', message = '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -221,7 +221,7 @@ async function autoMergeJoy() {
     const vo = obj[idx]
     if (idx < 34 && vo.length >= 2) {
       await mergeJoy(vo[0], vo[1])
-      await $.wait(3000)
+      await $.wait(2000)
       needContinue = true
     }
   }
@@ -266,8 +266,9 @@ async function jdCrazyJoyMerge() {
     });
     if (minJoyId < 30) {
       var needContinue = true;
+      var maxMin = 3;
       var joyId = $.shop[minJoyId - 1]['joyId'];
-      while(needContinue && minJoyId > 1 && zeroCount > 1) {
+      while(maxMin > 0 && needContinue && minJoyId > 1 && zeroCount > 1) {
         needContinue = false;
         const joy1 = $.shop[minJoyId - 1];
         const joy2 = $.shop[minJoyId - 2];
@@ -276,6 +277,7 @@ async function jdCrazyJoyMerge() {
           needContinue = true;
         }
         minJoyId--;
+        maxMin--;
       }
       
       await buyJoy(joyId);
