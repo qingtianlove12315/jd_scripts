@@ -17,8 +17,10 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        run: |
-          git clone ${{ secrets.repo }} -b ${{ secrets.branch }} .
+        uses: actions/checkout@v2
+        with:
+          repository: ljh740/myyml
+          ref: jd
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
