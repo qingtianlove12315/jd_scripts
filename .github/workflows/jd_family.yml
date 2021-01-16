@@ -20,9 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-       repository: 'https://gitee.com/ljh740/jd_scripts.git'
-       ref: 'dev'
-
+       repository: 'ljh740/helloyml'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
