@@ -29,3 +29,12 @@ jobs:
           source_branch: "yml"
           destination_branch: "main"
           github_token: ${{ secrets.PAT }}
+
+      - name: sync-scripts-jd
+        uses: repo-sync/github-sync@v2
+        if: env.PAT
+        with:
+          source_repo: ${{ secrets.repo }}
+          source_branch: "dev"
+          destination_branch: "jd"
+          github_token: ${{ secrets.PAT }}
