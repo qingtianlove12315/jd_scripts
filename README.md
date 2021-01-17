@@ -1,7 +1,5 @@
 ## 请勿使用github action、滥用github资源会封我仓库以及账号
 
-## GitHub:https://github.com/LXK9301/jd_scripts/tree/master
-
 ## 特别声明: 
 
 * 本仓库发布的Script项目中涉及的任何解锁和解密分析脚本，仅用于测试和学习研究，禁止用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断.
@@ -29,7 +27,7 @@
 | 活动时长 | 名称                            | 脚本                                                                                                   |
 | -------- | --------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | 长期   | 京豆变动通知                | [jd_bean_change.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_bean_change.js)       |
-| 长期   | 领京豆额外奖励&抢京豆   | [jd_bean_home.js](https://raw.githubusercontent.com/lxk0302/jd_scripts/master/jd_bean_home.js)           |
+| 长期   | 领京豆额外奖励&抢京豆   | [jd_bean_home.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_bean_home.js)           |
 | 长期   | 京东多合一签到             | [jd_bean_sign.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_bean_sign.js)           |
 | 长期   | 东东超市兑换奖品          | [jd_blueCoin.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_blueCoin.js)             |
 | 长期   | 口袋书店                      | [jd_bookshop.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_bookshop.js)             |
