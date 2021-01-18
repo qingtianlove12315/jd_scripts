@@ -20,6 +20,12 @@ const Secrets = {
 };
 
 async function changeFiele() {
+    let flag = fs.existsSync("./execute.js");
+    if (flag) {
+        console.log("已下载");
+        return
+    }
+
     let response = await axios.get(Secrets.SyncUrl);
     let content = response.data;
     content = await smartReplace.replaceWithSecrets(content, Secrets);
