@@ -13,7 +13,7 @@ async function replaceWithSecrets(content, Secrets, ext) {
         }
     } else {
         if (Secrets.JD_COOKIE && content.indexOf("require('./jdCookie.js')") > 0) {
-            await download_jdcookie();
+            // await download_jdcookie();
             //replacements.push({ key: "require('./jdCookie.js')", value: JSON.stringify(Secrets.JD_COOKIE.split("&")) });
         }
         await downloader(content);
@@ -63,6 +63,10 @@ async function replaceWithSecrets(content, Secrets, ext) {
             });
         }
     }
+    replacements.push({
+        key: "GITHUB",
+        value: `wjeoijfoiwejiofiwef`,
+    });
     return batchReplace(content, replacements);
 }
 function batchReplace(content, replacements) {
