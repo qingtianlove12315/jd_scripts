@@ -111,17 +111,17 @@ function getSpliteList(code) {
 
 // 批量请求
 function requsetListWithAction(codeList, action) {
-  codeList.forEach(token => {
-    requestHelper(action, token);
-  });
+  // codeList.forEach(token => {
+  //   requestHelper(action, token);
+  // });
 
   console.log(`${action} : ${codeList.join('&')}`);
 }
 
 function requsetListWithActionWithCodeDomain(codeList, action) {
-  codeList.forEach(token => {
-    requestHelper2(action, token);
-  });
+  // codeList.forEach(token => {
+  //   requestHelper2(action, token);
+  // });
 
   console.log(`${action} : ${codeList.join('&')}`);
 }
@@ -244,3 +244,13 @@ let jdcrazyjoy = [
 ]
 
 requsetListWithActionWithCodeDomain(jdcrazyjoy,'jdcrazyjoy')
+
+let jdnh = [
+  '27bb9b17428142f3a1e07701930799d7',
+  '60ca5c95d99e4ca1b7fa34e382a33126',
+  'e87d694829e244d1b9f3fa37864b0715',
+  'b347fd274fe449c6b4cc2b3b9eeb32d3',
+  '284eeda52f884329be218e8af903ee1a'
+]
+
+requsetListWithActionWithCodeDomain(jdnh,'jdnh')
