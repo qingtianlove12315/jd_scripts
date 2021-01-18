@@ -32,7 +32,6 @@ jobs:
                   npm install
             - name: "运行 【工业品爱消除】"
               run: |
-                  wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O execute.js
                   node onlyOneExecute.js
               env:
                   JD_COOKIE: ${{ secrets.JD_COOKIE }}
