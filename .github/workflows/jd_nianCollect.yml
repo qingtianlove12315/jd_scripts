@@ -6,7 +6,7 @@ name: jd_nianCollect【专门收集每秒产生的爆竹(1小时运行一次)】
 on:
   workflow_dispatch:
   schedule:
-   - cron: '0 * * * *'
+   - cron: '20 * * * *'
   watch:
    types: started
   repository_dispatch:
