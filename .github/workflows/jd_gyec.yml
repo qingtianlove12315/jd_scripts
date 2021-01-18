@@ -32,7 +32,6 @@ jobs:
                   npm install
             - name: "运行 【工业品爱消除】"
               run: |
-                  unset GITHUB
                   node onlyOneExecute.js
               env:
                   JD_COOKIE: ${{ secrets.JD_COOKIE }}
@@ -44,4 +43,4 @@ jobs:
                   TG_USER_ID: ${{ secrets.TG_USER_ID }}
                   DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
                   DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-                  SYNCURL: "https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js"
+                  SYNCURL: https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js
