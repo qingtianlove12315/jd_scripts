@@ -20,8 +20,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v2
               with:
-                repository: ljh740/myyml
-                ref: jd
+                  repository: ljh740/myyml
+                  ref: jd
             - name: Use Node.js 10.x
               uses: actions/setup-node@v1
               with:
