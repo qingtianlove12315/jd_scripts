@@ -20,8 +20,11 @@
 > ***您使用或者复制了本仓库且本人制作的任何脚本，则视为`已接受`此声明，请仔细阅读*** 
 
 ## Script脚本列表
+
 #### 说明
+
 1. 其中 [jd_bean_sign.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_bean_sign.js) 可N个京东账号，Node.js专用，核心脚本是JD_DailyBonus.js， IOS软件用户请使用NobyDa的 [JD_DailyBonus.js](https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js)
+
 2. 以字母排序。
 
 | 活动时长 | 名称                            | 脚本                                                                                                   |
@@ -73,107 +76,63 @@
 
 搬运脚本
 1.  【[@yangtingxiao](https://github.com/yangtingxiao)】京东抽奖机([jd_lotteryMachine.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_lotteryMachine.js))
+
 2.  【[@yangtingxiao](https://github.com/yangtingxiao)】京东排行榜([jd_rankingList.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_rankingList.js))
 
 **脚本兼容: [QuantumultX](https://apps.apple.com/us/app/quantumult-x/id1443988620), [Surge](https://apps.apple.com/us/app/surge-4/id1442620678), [Loon](https://apps.apple.com/us/app/loon/id1373567447), 小火箭, JSBox, Node.js**
 
 **TODO**
+
 - [x] 所有活动互助码在一个脚本打印
 
 ## 邀请码互助
-  - [邀请码互助入口](https://github.com/LXK9301/jd_scripts/discussions)
-  - [获取各类活动互助码脚本 jd_get_share_code.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_get_share_code.js)
-  - [邀请码使用规范](githubAction.md#互助码类环境变量)(仅限云端)
+
+- [邀请码互助入口](https://github.com/LXK9301/jd_scripts/discussions)
+
+- [获取各类活动互助码脚本 jd_get_share_code.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_get_share_code.js)
+
+- [邀请码使用规范](githubAction.md#互助码类环境变量)(仅限云端)
+
 ## 食用方法
 
-### 方法一：本地安装Node.js，下载本库脚本
+### 1. Docker1
 
-  - 教程请见：[EvineDeng/jd-base](https://github.com/EvineDeng/jd-base)，适用于以下系统：
+- [部署方法](https://github.com/LXK9301/jd_scripts/tree/master/docker)
 
-    1. Armbian/OpenWrt/Debian/Ubuntu/CentOS/Fedora/RedHat等Linux系统
-
-    2. Android
-
-    3. MacOS
+- [环境变量集合](https://github.com/LXK9301/jd_scripts/blob/master/githubAction.md)
  
-### 方法二：Docker（NAS或VPS用户）
-
- - 可以精确控制任务运行时间，有二种办法：[docker办法一](https://github.com/LXK9301/jd_scripts/tree/master/docker)、[docker办法二（和本地安装Node.js类似）](https://github.com/EvineDeng/jd-base)
- - [环境变量集合](https://github.com/LXK9301/jd_scripts/blob/master/githubAction.md)
- 
-#### 注：以上2种运行机制都是Node.js，故您需仔细阅读下面几点
-
-  - 获取京东cookie教程可参考 [浏览器获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md) , [插件获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie2.md)
-
-  - 京东APP扫码获取cookie(此种方式获取的cookie有效期为90天)(执行`node getJDCookie.js`即可)
+- 获取京东cookie教程可参考：
+  
+  + [浏览器获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md)
     
-  - 方法二Docker安装Cookie请见各自的说明。
+  + [插件获取京东cookie教程](https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie2.md)
+    
+  + 京东APP扫码获取cookie(此种方式获取的cookie有效期为90天)(执行`node getJDCookie.js`即可)
 
-### 方法三：iOS系统的代理软件（QuantumultX, Surge, Loon, 小火箭）
+### 2. Docker2
 
-  - [京东cookie获取脚本 JD_extra_cookie.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/JD_extra_cookie.js)
+教程请见：[EvineDeng/jd-base](https://github.com/EvineDeng/jd-base)
 
-```
-# QuantumultX
+### 3. 系统直装
 
-#东东农场
-5 6-18/6 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_fruit.js, tag=东东农场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png, enabled=true
+教程请见：[EvineDeng/jd-base](https://github.com/EvineDeng/jd-base)，适用于以下系统：
 
-#东东萌宠
-15 6-18/6 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_pet.js, tag=东东萌宠, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png, enabled=true
+  1. Armbian/OpenWrt/Debian/Ubuntu/CentOS/Fedora/RedHat等Linux系统
 
-# 种豆得豆
-1 7-21/2 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png, enabled=true
+  2. Android
 
-#天天加速
-8 */3 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_speed.js, tag=京东天天加速, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdjs.png, enabled=true
+  3. MacOS
 
-#京东摇钱树
-3 */2 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_moneyTree.js, tag=京东摇钱树, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdyqs.png, enabled=true
+### 4. iOS代理软件（QuantumultX, Surge, Loon, 小火箭）
 
-#京东宠汪汪
-15 */2 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy.js, tag=京东宠汪汪, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+- [京东cookie获取脚本 JD_extra_cookie.js](https://raw.githubusercontent.com/LXK9301/jd_scripts/master/JD_extra_cookie.js)
 
-#宠汪汪偷好友积分与狗粮
-0 0,6 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_steal.js, tag=宠汪汪偷好友积分与狗粮, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+## 赞赏码(开发维护不易,请赏杯茶水费)
 
-#京东宠汪汪喂食
-15 */1 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_feedPets.js, tag=京东宠汪汪喂食, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
-
-#宠汪汪积分兑换奖品
-0 0-16/8,12 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_reward.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
-
-# 宠汪汪邀请助力与赛跑助力
-15 10 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_joy_run.js, tag=宠汪汪邀请助力与赛跑助力, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
- 
-#京小超
-11 1-23/5 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_superMarket.js, tag=京小超, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
-
-#京小超兑换奖品
-0 0 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_blueCoin.js, tag=京小超兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
-
-#进店领豆
-10 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_shop.js, tag=进店领豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_shop.png, enabled=true
-
-#摇京豆
-5 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_club_lottery.js, tag=摇京豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdyjd.png, enabled=true
-
-#京东全民开红包
-1 1 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_redPacket.js, tag=京东全民开红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
-
-#京豆变动通知
-2 9 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_bean_change.js, tag=京豆变动通知, enabled=true
-
-#京东手机狂欢城
-1 0-18/6 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_818.js, tag=京东手机狂欢城, enabled=true
-
-#京东星推官
-2 0 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_xtg.js, tag=京东星推官, enabled=true
-```
-### 赞赏码(开发维护不易,请赏杯茶水费)
 <div align=center><img width="250" height="250" src="./icon/thanks.jpg"/></div>
 
-### 特别感谢(排名不分先后)：
+## 特别感谢(排名不分先后)：
+
 * [@NobyDa](https://github.com/NobyDa)
 
 * [@chavyleung](https://github.com/chavyleung)
@@ -183,6 +142,5 @@
 * [@Zero-S1](https://github.com/Zero-S1)
 
 * [@uniqueque](https://github.com/uniqueque)
-
 
 * [@nzw9314](https://github.com/nzw9314)
