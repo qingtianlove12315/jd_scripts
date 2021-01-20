@@ -44,6 +44,7 @@ async function start() {
     } catch (e) {
         console.log("执行异常:" + e);
     }
+    
     console.log("执行完毕");
 }
 
