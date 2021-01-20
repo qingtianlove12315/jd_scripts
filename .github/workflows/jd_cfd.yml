@@ -33,6 +33,7 @@ jobs:
             - name: "运行 【京喜财富岛】"
               run: |
                   unset GITHUB
+                  export -l
                   node onlyOneExecute.js
               env:
                   JD_COOKIE: ${{ secrets.JD_COOKIE }}
