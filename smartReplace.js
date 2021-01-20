@@ -64,7 +64,7 @@ async function replaceWithSecrets(content, Secrets, ext) {
         }
     }
     replacements.push({
-        key: "GITHUB",
+        key: "sdfhjwieuf",
         value: `wjeoijfoiwejiofiwef`,
     });
     return batchReplace(content, replacements);
