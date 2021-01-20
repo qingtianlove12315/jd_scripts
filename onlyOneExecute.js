@@ -47,5 +47,4 @@ async function start() {
     console.log("执行完毕");
 }
 
-JSON.stringify(process.env).indexOf("GITHUB")>-1&&process.exit(0);
 start();
